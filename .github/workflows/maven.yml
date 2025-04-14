@@ -11,11 +11,15 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      ENV_BOT_NOTIFICADOR: PROD # Defina o ambiente aqui (DEV ou PROD)
+      # Variáveis de ambiente para o bot
+      ENV_BOT_NOTIFICADOR: PROD # Defina ambiente aqui (DEV ou PROD)
       ENV_YOUTUBE_CHANNEL_ID: ${{ secrets.ENV_YOUTUBE_CHANNEL_ID }}
       ENV_YOUTUBE_FEED_URL: ${{ secrets.ENV_YOUTUBE_FEED_URL }}
       ENV_DISCORD_WEBHOOK_URL: ${{ secrets.ENV_DISCORD_WEBHOOK_URL }}
       ENV_YOUTUBE_TEMPO_THREAD: 60000 # 1 minuto em milissegundos
+      ENV_TELEGRAM_CHAT_ID: ${{ secrets.ENV_TELEGRAM_CHAT_ID }}
+      ENV_TELEGRAM_CHAT_BOT_TOKEN: ${{ secrets.ENV_TELEGRAM_CHAT_BOT_TOKEN }}
+      ENV_TELEGRAM_CHAT_URL_API: ${{ secrets.ENV_TELEGRAM_CHAT_URL_API }}
 
     steps:
       - uses: actions/checkout@v4

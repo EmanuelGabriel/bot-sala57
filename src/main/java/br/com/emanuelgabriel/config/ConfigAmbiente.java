@@ -88,6 +88,7 @@ public class ConfigAmbiente {
             // Carregar as propriedades
             this.channelId = configLoader.getProperty("prop.channel-id");
             this.feedUrl = configLoader.getProperty("prop.feed-url").concat("=").concat(this.channelId);
+            logger.log(Level.INFO, "URL do feed: {0}", this.feedUrl);
             this.tempoThread = Long.valueOf(configLoader.getProperty("prop.tempo-thread"));
             this.webhookDiscordUrl = configLoader.getProperty("prop.webhook-discord-url");
             this.telegramBotToken = configLoader.getProperty("prop.telegram-bot-token");

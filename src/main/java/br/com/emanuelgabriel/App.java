@@ -25,7 +25,7 @@ import br.com.emanuelgabriel.utils.FileStorageUtil;
 public class App {
 
     private static final Logger logger = Logger.getLogger(App.class.getName());
-    private static final ConfigAmbiente config = new ConfigAmbiente();
+    private static final ConfigAmbiente configEnv = new ConfigAmbiente();
     private static final Set<String> notificaVideos = FileStorageUtil.carregarIds();
 
     public static void main(String[] args) {
@@ -35,14 +35,14 @@ public class App {
             logger.info("Verificando novos vídeos...");
             verificarNovosVideosDaSala57();
             logger.info("Verificação concluída. Aguardando o próximo ciclo...");
-        }, 0, config.getTempoThread(), TimeUnit.MILLISECONDS);
+        }, 0, configEnv.getTempoThread(), TimeUnit.MILLISECONDS);
 
     }
 
     private static void verificarNovosVideosDaSala57() {
         try {
             // Conectar ao feed RSS e obter o documento
-            var doc = Jsoup.connect(config.getFeedUrl()).get();
+            var doc = Jsoup.connect(configEnv.getFeedUrl()).get();
 
             var entry = doc.selectFirst("entry");
             if (entry == null) {
@@ -71,7 +71,6 @@ public class App {
             }
 
         } catch (IOException e) {
-            System.err.println(String.format("Erro ao buscar feed RSS: %s", e.getMessage()));
             logger.log(Level.INFO, "Erro ao buscar feed RSS: {0}", e.getMessage());
             Thread.currentThread().interrupt();
         }

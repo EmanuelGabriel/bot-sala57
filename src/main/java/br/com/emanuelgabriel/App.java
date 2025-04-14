@@ -67,7 +67,7 @@ public class App {
                 notificaVideos.add(videoId);
                 FileStorageUtil.salvarIds(notificaVideos);
             } else {
-                logger.info(String.format("Nenhum novo vídeo encontrado na data %s.", dataPublicacaoFormatada));
+                logger.info(String.format("Nenhum novo vídeo publicado na data %s.", dataPublicacaoFormatada));
             }
 
         } catch (IOException e) {

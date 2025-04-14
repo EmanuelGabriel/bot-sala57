@@ -92,9 +92,9 @@ public class ConfigAmbiente {
                 logger.log(Level.INFO, "URL do feed: {0}", this.feedUrl);
                 this.tempoThread = Long.valueOf(System.getenv("ENV_YOUTUBE_TEMPO_THREAD"));
                 this.webhookDiscordUrl = System.getenv("ENV_DISCORD_WEBHOOK_URL");
-                this.telegramBotToken = System.getenv("ENV_TELEGRAM_BOT_TOKEN");
+                this.telegramBotToken = System.getenv("ENV_TELEGRAM_CHAT_BOT_TOKEN");
                 this.telegramBotUsername = System.getenv("ENV_TELEGRAM_BOT_USERNAME");
-                this.telegramUrlApi = System.getenv("ENV_TELEGRAM_URL_API");
+                this.telegramUrlApi = System.getenv("ENV_TELEGRAM_CHAT_URL_API");
                 this.telegramChatId = System.getenv("ENV_TELEGRAM_CHAT_ID");
             } else {
                 logger.info("Carregando configurações de desenvolvimento...");

@@ -27,7 +27,7 @@ jobs:
       run: mvn -B package --file pom.xml
 
     - name: Print environment
-      run: echo "Ambiente configurado: $ENV_BOT_NOTIFICADOR"   
+      run: echo "Ambiente configurado $ENV_BOT_NOTIFICADOR"   
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph

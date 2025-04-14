@@ -62,7 +62,7 @@
                         <configuration>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>br.com.emanuelgabriel.App.java</mainClass> <!-- Ajuste para sua classe principal -->
+                                    <mainClass>br.com.emanuelgabriel.App</mainClass> <!-- Ajuste para sua classe principal -->
                                 </transformer>
                             </transformers>
                         </configuration>

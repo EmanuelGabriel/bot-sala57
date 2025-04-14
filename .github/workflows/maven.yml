@@ -17,7 +17,9 @@ jobs:
       ENV_YOUTUBE_FEED_URL: ${{ secrets.ENV_YOUTUBE_FEED_URL }}
       ENV_DISCORD_WEBHOOK_URL: ${{ secrets.ENV_DISCORD_WEBHOOK_URL }}
       ENV_YOUTUBE_TEMPO_THREAD: 60000 # 1 minuto em milissegundos
+      ## Config Telegram
       ENV_TELEGRAM_CHAT_ID: ${{ secrets.ENV_TELEGRAM_CHAT_ID }}
+      ENV_TELEGRAM_CHAT_NAME_BOT: ${{ secrets.ENV_TELEGRAM_CHAT_NAME_BOT }}
       ENV_TELEGRAM_CHAT_BOT_TOKEN: ${{ secrets.ENV_TELEGRAM_CHAT_BOT_TOKEN }}
       ENV_TELEGRAM_CHAT_URL_API: ${{ secrets.ENV_TELEGRAM_CHAT_URL_API }}
 

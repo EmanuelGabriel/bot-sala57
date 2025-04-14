@@ -27,6 +27,7 @@ public class App {
     private static final Logger logger = Logger.getLogger(App.class.getName());
     private static final ConfigAmbiente configEnv = new ConfigAmbiente();
     private static final Set<String> notificaVideos = FileStorageUtil.carregarIds();
+    private static final Long INITIAL_DELAY = 0L;
 
     public static void main(String[] args) {
 
@@ -35,7 +36,7 @@ public class App {
             logger.info("Verificando novos vídeos...");
             verificarNovosVideosDaSala57();
             logger.info("Verificação concluída. Aguardando o próximo ciclo...");
-        }, 0, configEnv.getTempoThread(), TimeUnit.MILLISECONDS);
+        }, INITIAL_DELAY, TimeUnit.HOURS.toMillis(configEnv.getTempoThread()), TimeUnit.MILLISECONDS);
 
     }
 

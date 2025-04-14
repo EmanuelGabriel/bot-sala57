@@ -71,6 +71,27 @@ public class NotificadorTelegram extends TelegramLongPollingBot implements Notif
         }
     }
 
+    /**
+     * Envia uma mensagem de notificação para um chat do Telegram.
+     *
+     * @param title O título da notificação, geralmente o título de um vídeo ou
+     * conteúdo.
+     * @param link O link associado à notificação, geralmente uma URL para o
+     * conteúdo.
+     * @param dataPublicacao A data de publicação do conteúdo no formato
+     * ISO-8601 (ex.: "2023-10-01T10:15:30+01:00").
+     *
+     * Este método formata a data de publicação, constrói uma mensagem,
+     * codifica-a para transmissão via URL e a envia para um chat específico do
+     * Telegram usando a API do Bot do Telegram.
+     *
+     * A URL da API do Telegram, o token do bot e o ID do chat são recuperados
+     * da configuração da aplicação. Logs são gerados para indicar o status do
+     * processo de notificação.
+     *
+     * Em caso de erro durante o processo de notificação, uma mensagem de erro é
+     * registrada nos logs.
+     */
     public void enviarNotificacaoTelegram(String title, String link, String dataPublicacao) {
         var publishedDateTime = OffsetDateTime.parse(dataPublicacao).toLocalDateTime();
         var dataPublicacaoFormatada = publishedDateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -78,8 +99,6 @@ public class NotificadorTelegram extends TelegramLongPollingBot implements Notif
         var message = String.format("Novo vídeo publicado: %s (Publicado em: %s) %n%s", title, dataPublicacaoFormatada, link);
         var encodedMessage = URLEncoder.encode(message, StandardCharsets.UTF_8);
         var url = String.format("%s%s/sendMessage?chat_id=%s&text=%s", configEnv.getTelegramUrlApi(), configEnv.getTelegramBotToken(), configEnv.getTelegramChatId(), encodedMessage);
-
-        logger.log(Level.INFO, "Enviando notificação para o Telegram: {0}", url);
 
         try {
 
@@ -89,7 +108,7 @@ public class NotificadorTelegram extends TelegramLongPollingBot implements Notif
                     .uri(URI.create(url))
                     .GET()
                     .build(), HttpResponse.BodyHandlers.ofString())
-                    .thenAccept(response -> System.out.println("Notificação enviada: " + response.body()));
+                    .thenAccept(response -> logger.log(Level.INFO, "Notificação enviada com sucesso para o Telegram. Status: {0}", response.statusCode()));
         } catch (Exception e) {
             System.err.println(String.format("Erro ao enviar notificação: ", e.getMessage()));
             logger.log(Level.SEVERE, "Erro ao enviar notificação: {0}", e.getMessage());

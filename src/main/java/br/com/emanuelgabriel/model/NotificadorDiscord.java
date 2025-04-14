@@ -19,6 +19,26 @@ public class NotificadorDiscord implements Notificador {
     private static final HttpClient httpClient = HttpClient.newHttpClient();
     private static final String CONTENT_TYPE = "application/json";
 
+    /**
+     * Envia uma mensagem de notificação para um webhook do Discord.
+     *
+     * @param titulo O título do vídeo ou mensagem a ser notificada.
+     * @param link O link associado ao vídeo ou mensagem.
+     * @param dataPublicacao A data de publicação no formato ISO-8601 (ex.:
+     * "2023-10-01T10:15:30+01:00").
+     *
+     * O método formata a data de publicação para o formato "dd/MM/yyyy" e
+     * constrói um payload JSON contendo o título, a data formatada e o link. Em
+     * seguida, envia uma requisição HTTP POST para o webhook do Discord
+     * configurado.
+     *
+     * Em caso de sucesso, um log informativo é gerado. Caso contrário, um log
+     * de erro é registrado com o código de status e a resposta do servidor.
+     *
+     * Exceções de entrada/saída (IOException) e interrupção de thread
+     * (InterruptedException) são tratadas, e um log de erro é gerado em caso de
+     * falha.
+     */
     @Override
     public void enviarMensagem(String titulo, String link, String dataPublicacao) {
 
@@ -35,10 +55,12 @@ public class NotificadorDiscord implements Notificador {
                     .build();
 
             var response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            logger.log(Level.INFO, "Resposta do Discord: {0}", response.body());
+            logger.log(Level.INFO, "Código de status: {0}", response.statusCode());
             if (response.statusCode() == 204) {
-                logger.info("Mensagem enviada com sucesso para o Discord.");
+                logger.log(Level.INFO, "Notificação enviada com sucesso para o Discord. Status: {0}", response.statusCode());
             } else {
-                logger.warning(String.format("Falha ao enviar mensagem para o Discord: ", response.statusCode(), response.body()));
+                logger.log(Level.SEVERE, String.format("Falha ao enviar mensagem para o Discord: %s - %s", response.statusCode(), response.body()));
             }
 
         } catch (IOException | InterruptedException e) {

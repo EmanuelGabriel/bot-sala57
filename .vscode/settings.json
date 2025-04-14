@@ -1,0 +1,8 @@
+{
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "editor.minimap.enabled": false,
+  "debug.console.fontSize": 14,
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "java.compile.nullAnalysis.mode": "automatic"
+}

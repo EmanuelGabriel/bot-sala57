@@ -71,7 +71,7 @@ public class App {
             }
 
         } catch (IOException e) {
-            logger.log(Level.INFO, "Erro ao buscar feed RSS: {0}", e.getMessage());
+            logger.log(Level.SEVERE, "Erro ao buscar feed RSS: {0}", e.getMessage());
             Thread.currentThread().interrupt();
         }
     }

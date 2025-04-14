@@ -85,18 +85,30 @@ public class ConfigAmbiente {
             // Carregar o arquivo .properties correspondente
             configLoader.loadPropertiesFromFile(propertiesFile);
 
-            // Carregar as propriedades
-            this.channelId = configLoader.getProperty("prop.channel-id");
-            this.feedUrl = configLoader.getProperty("prop.feed-url").concat("=").concat(this.channelId);
-            logger.log(Level.INFO, "URL do feed: {0}", this.feedUrl);
-            this.tempoThread = Long.valueOf(configLoader.getProperty("prop.tempo-thread"));
-            this.webhookDiscordUrl = configLoader.getProperty("prop.webhook-discord-url");
-            this.telegramBotToken = configLoader.getProperty("prop.telegram-bot-token");
-            this.telegramBotUsername = configLoader.getProperty("prop.telegram-name-bot");
-            this.telegramUrlApi = configLoader.getProperty("prop.telegram-url-api");
-            this.telegramChatId = configLoader.getProperty("prop.telegram-chat-id");
+            if (propertiesFile.equals("config-prod.properties")) {
+                logger.info("Carregando configurações de produção...");
+                this.channelId = System.getenv("ENV_YOUTUBE_CHANNEL_ID");
+                this.feedUrl = System.getenv("ENV_YOUTUBE_FEED_URL").concat("=").concat(this.channelId);
+                logger.log(Level.INFO, "URL do feed: {0}", this.feedUrl);
+                this.tempoThread = Long.valueOf(System.getenv("ENV_YOUTUBE_TEMPO_THREAD"));
+                this.webhookDiscordUrl = System.getenv("ENV_DISCORD_WEBHOOK_URL");
+                this.telegramBotToken = System.getenv("ENV_TELEGRAM_BOT_TOKEN");
+                this.telegramBotUsername = System.getenv("ENV_TELEGRAM_BOT_USERNAME");
+                this.telegramUrlApi = System.getenv("ENV_TELEGRAM_URL_API");
+                this.telegramChatId = System.getenv("ENV_TELEGRAM_CHAT_ID");
+            } else {
+                logger.info("Carregando configurações de desenvolvimento...");
+                this.channelId = configLoader.getProperty("prop.channel-id");
+                this.feedUrl = configLoader.getProperty("prop.feed-url").concat("=").concat(this.channelId);
+                logger.log(Level.INFO, "URL do feed: {0}", this.feedUrl);
+                this.tempoThread = Long.valueOf(configLoader.getProperty("prop.tempo-thread"));
+                this.webhookDiscordUrl = configLoader.getProperty("prop.webhook-discord-url");
+                this.telegramBotToken = configLoader.getProperty("prop.telegram-bot-token");
+                this.telegramBotUsername = configLoader.getProperty("prop.telegram-name-bot");
+                this.telegramUrlApi = configLoader.getProperty("prop.telegram-url-api");
+                this.telegramChatId = configLoader.getProperty("prop.telegram-chat-id");
+            }
 
-            logger.info("Configuração de ambiente concluída com sucesso.");
         } catch (NumberFormatException e) {
             logger.log(Level.SEVERE, "Erro ao carregar as configurações de ambiente: {0}", e.getMessage());
             throw new RuntimeException("Falha ao inicializar as configurações de ambiente.", e);

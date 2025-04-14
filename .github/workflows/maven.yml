@@ -24,6 +24,9 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+      
+    - name: Run the application
+      run: java -jar target/*.jar # Ajuste o caminho/nome do JAR conforme necessário  
 
     - name: Print environment
       run: echo "Ambiente configurado $ENV_BOT_NOTIFICADOR" 

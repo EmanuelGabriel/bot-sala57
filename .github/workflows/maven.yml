@@ -24,18 +24,26 @@ jobs:
       ENV_TELEGRAM_CHAT_URL_API: ${{ secrets.ENV_TELEGRAM_CHAT_URL_API }}
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: "17"
           distribution: "temurin"
           cache: maven
-      - name: Build with Maven
-        run: mvn -B package --file pom.xml
 
-      - name: Run the application
-        run: java -jar target/*.jar # Ajuste o caminho/nome do JAR conforme necessário
+      - name: Build Project with Maven
+        run: mvn clean install -DskipTests=false
+
+        # Configurar e testa o projeto
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+        # Constrói a imagem Docker
+      - name: Build Docker Image
+        run: docker build -t bot-sala57 .
 
       - name: Print environment
         run: echo "Ambiente configurado $ENV_BOT_NOTIFICADOR"

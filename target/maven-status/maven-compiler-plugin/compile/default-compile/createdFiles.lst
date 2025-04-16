@@ -1,0 +1,8 @@
+br\com\emanuelgabriel\utils\FileStorageUtil.class
+br\com\emanuelgabriel\utils\ConfigLoader.class
+br\com\emanuelgabriel\model\NotificadorTelegram.class
+br\com\emanuelgabriel\utils\FileStorageUtil$1.class
+br\com\emanuelgabriel\model\Notificador.class
+br\com\emanuelgabriel\App.class
+br\com\emanuelgabriel\config\ConfigAmbiente.class
+br\com\emanuelgabriel\model\NotificadorDiscord.class

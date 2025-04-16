@@ -4,5 +4,15 @@
   "debug.console.fontSize": 14,
   "editor.tabSize": 2,
   "editor.formatOnSave": true,
-  "java.compile.nullAnalysis.mode": "automatic"
+  "java.compile.nullAnalysis.mode": "automatic",
+  "terminal.integrated.profiles.windows": {
+    "Java 17 Maven": {
+      "path": "C:\\Windows\\System32\\cmd.exe",
+      "args": [
+        "/k",
+        "\"set JAVA_HOME=C:\\Users\\emanuel.sousa\\Documents\\jdks\\jdk-17.0.2 && set PATH=%JAVA_HOME%\\bin;%PATH%\""
+      ]
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "Java 17 Maven"
 }
